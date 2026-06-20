@@ -26,11 +26,16 @@
             background-color: var(--bg); 
             color: var(--text); 
             padding: 20px; 
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         .container { 
             max-width: 1100px; 
             margin: 0 auto; 
+            flex: 1;
+            width: 100%;
         }
 
         header { 
@@ -52,7 +57,7 @@
             opacity: 0.9;
         }
 
-        /* تقسيم الصفحة: مساحة العمل + الشريط الجانبي للإعلانات */
+        /* تقسيم الصفحة: مساحة العمل + الشريط الجانبي للاعلانات */
         .main-layout { 
             display: grid; 
             grid-template-columns: 1fr 300px; 
@@ -186,6 +191,92 @@
             font-size: 13px;
         }
         .tips-box h4 { color: #1e3a8a; margin-bottom: 5px; }
+
+        /* تذييل الصفحة Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            border-top: 1px solid var(--border);
+            font-size: 14px;
+            color: #64748b;
+        }
+
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: bold;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* تصميم النافذة المنبثقة لسياسة الخصوصية (Modal) */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1000; 
+            padding-top: 60px; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgba(0,0,0,0.4); 
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 30px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 700px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .close {
+            color: #aaaaaa;
+            float: left;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+        }
+
+        .modal-content h2 {
+            color: #1e3a8a;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .modal-content h3 {
+            color: var(--primary);
+            margin: 15px 0 5px 0;
+            font-size: 16px;
+        }
+
+        .modal-content p, .modal-content ul {
+            font-size: 14px;
+            color: #334155;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        
+        .modal-content ul {
+            padding-right: 20px;
+        }
     </style>
 </head>
 <body>
@@ -197,11 +288,9 @@
         </header>
 
         <div class="main-layout">
-            <!-- مساحة العمل الأساسية -->
             <div class="workspace">
                 <textarea id="textInput" placeholder="أدخل أو الصق نصك هنا للبدء في المعالجة الفورية..."></textarea>
                 
-                <!-- لوحة الإحصائيات الفورية -->
                 <div class="stats-grid">
                     <div class="stat-card">
                         <span id="wordCount">0</span>
@@ -217,7 +306,6 @@
                     </div>
                 </div>
 
-                <!-- أزرار التحكم والتنفيذ -->
                 <div class="button-group">
                     <button onclick="cleanText()">تنظيف النص</button>
                     <button onclick="convertToHashtags()">تحويل لهاشتاقات</button>
@@ -226,10 +314,8 @@
                 </div>
             </div>
 
-            <!-- شريط جانبي مخصص للربح من إعلانات أدسنس -->
             <div class="sidebar">
                 <div class="ad-space">
-                    <!-- استبدل هذا الجزء مستقبلاً بشفرة إعلانات Google AdSense المباشرة -->
                     مساحة إعلانية مخصصة للربح <br> (AdSense / Ezoic)
                 </div>
                 
@@ -241,7 +327,30 @@
         </div>
     </div>
 
-    <!-- برمجة التفاعل الذكي وفلاتر النصوص بـ JavaScript -->
+    <footer>
+        <p>© جميع الحقوق محفوظة لأداة المُحترَف. <a onclick="openModal()">سياسة الخصوصية (Privacy Policy)</a></p>
+    </footer>
+
+    <div id="privacyModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>سياسة الخصوصية (Privacy Policy)</h2>
+            <p>مرحباً بك في موقعنا. نحن نحترم خصوصيتك ونلتزم بحمايتها ومطابقة شروط ومعايير شبكات الإعلانات العالمية.</p>
+            
+            <h3>1. جمع المعلومات ومعالجتها</h3>
+            <p>هذه الأداة تعمل بالكامل داخل متصفح المستخدم (Client-Side). نحن لا نقوم بجمع، تخزين، أو مشاركة النصوص التي تقوم بإدخالها في الأداة على خوادم خارجية على الإطلاق.</p>
+            
+            <h3>2. ملفات تعريف الارتباط وإعلانات الطرف الثالث</h3>
+            <p>نحن نستخدم خدمات إعلانية من أطراف ثالثة (مثل Google AdSense) لعرض الإعلانات عندما تزور موقعنا. قد تستخدم هذه الشركات معلومات (لا تشمل اسمك أو عنوانك أو بريدك الإلكتروني) حول زياراتك لهذا الموقع من أجل تقديم إعلانات حول السلع والخدمات التي تهمك عبر استخدام ملفات تعريف الارتباط (Cookies).</p>
+            
+            <h3>3. ملف تعريف الارتباط DART من Google</h3>
+            <p>تستخدم Google ملف تعريف الارتباط DART لخدمة الإعلانات بناءً على زيارات المستخدمين لموقعنا ومواقع أخرى على الإنترنت. يمكن للمستخدمين إلغاء استخدام ملف تعريف الارتباط DART عبر زيارة سياسة الخصوصية الخاصة بشبكة Google الإعلانية للمحتوى.</p>
+            
+            <h3>4. الموافقة</h3>
+            <p>باستخدامك لموقعنا، فإنك توافق على سياسة الخصوصية الخاصة بنا وتوافق على شروطها.</p>
+        </div>
+    </div>
+
     <script>
         const textInput = document.getElementById('textInput');
         const wordCount = document.getElementById('wordCount');
@@ -253,20 +362,13 @@
 
         function updateStats() {
             const text = textInput.value.trim();
-            
-            // حساب الكلمات بشكل دقيق
             const words = text === "" ? [] : text.split(/\s+/);
             wordCount.innerText = words.length;
-            
-            // حساب الحروف
             charCount.innerText = text.length;
-
-            // حساب وقت القراءة التقريبي (المعدل الطبيعي هو 200 كلمة بالدقيقة)
             const time = Math.ceil(words.length / 200);
             readingTime.innerText = text === "" ? "0 د" : time + " د";
         }
 
-        // وظيفة تنظيف النص من المسافات والفراغات العشوائية
         function cleanText() {
             let text = textInput.value;
             if(!text) return;
@@ -275,33 +377,47 @@
             updateStats();
         }
 
-        // وظيفة تحويل النص إلى هاشتاقات جاهزة للسوشيال ميديا
         function convertToHashtags() {
             let text = textInput.value.trim();
             if(!text) return;
             let words = text.split(/\s+/);
-            // إضافة وسام الهاشتاق إذا لم يكن موجوداً
             let hashtags = words.map(word => word.startsWith('#') ? word : '#' + word).join(' ');
             textInput.value = hashtags;
             updateStats();
         }
 
-        // وظيفة النسخ الذكي للحافظة بنقرة واحدة
         function copyToClipboard() {
             if(!textInput.value) {
                 alert('الرجاء كتابة نص أولاً لتتمكن من نسخه!');
                 return;
             }
             textInput.select();
-            textInput.setSelectionRange(0, 99999); /* للهواتف المحمولة */
+            textInput.setSelectionRange(0, 99999);
             document.execCommand('copy');
             alert('تم نسخ النص بنجاح إلى الحافظة! 🎉');
         }
 
-        // وظيفة مسح النص وإعادة التصفير
         function clearAll() {
             textInput.value = "";
             updateStats();
+        }
+
+        /* دوال التحكم بالنافذة المنبثقة لسياسة الخصوصية */
+        const modal = document.getElementById("privacyModal");
+        
+        function openModal() {
+            modal.style.display = "block";
+        }
+        
+        function closeModal() {
+            modal.style.display = "none";
+        }
+
+        // إغلاق النافذة عند الضغط في أي مكان خارجها
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
         }
     </script>
 </body>
