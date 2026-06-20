@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة المحتوى - أداة تعديل وتحويل النصوص الذكية</title>
+    <style>
+        /* إعدادات الألوان والتصميم العصري */
+        :root {
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #0f172a;
+            --border: #e2e8f0;
+        }
+
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+            font-family: system-ui, -apple-system, sans-serif; 
+        }
+
+        body { 
+            background-color: var(--bg); 
+            color: var(--text); 
+            padding: 20px; 
+        }
+
+        .container { 
+            max-width: 1100px; 
+            margin: 0 auto; 
+        }
+
+        header { 
+            text-align: center; 
+            margin-bottom: 30px; 
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+        }
+
+        header h1 { 
+            font-size: 24px;
+            margin-bottom: 10px; 
+        }
+
+        header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* تقسيم الصفحة: مساحة العمل + الشريط الجانبي للإعلانات */
+        .main-layout { 
+            display: grid; 
+            grid-template-columns: 1fr 300px; 
+            gap: 20px; 
+        }
+
+        @media (max-width: 768px) { 
+            .main-layout { 
+                grid-template-columns: 1fr; 
+            } 
+        }
+
+        .workspace { 
+            background: var(--card-bg); 
+            padding: 20px; 
+            border-radius: 12px; 
+            border: 1px solid var(--border); 
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        textarea { 
+            width: 100%; 
+            height: 250px; 
+            padding: 15px; 
+            border-radius: 8px; 
+            border: 1px solid var(--border); 
+            resize: vertical; 
+            font-size: 16px; 
+            margin-bottom: 15px; 
+            outline: none; 
+            transition: 0.2s;
+        }
+
+        textarea:focus { 
+            border-color: var(--primary); 
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        /* شبكة الإحصائيات الفورية */
+        .stats-grid { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 10px; 
+            margin-bottom: 20px; 
+            text-align: center; 
+        }
+
+        .stat-card { 
+            background: var(--bg); 
+            padding: 12px; 
+            border-radius: 8px; 
+            border: 1px solid var(--border); 
+        }
+
+        .stat-card span { 
+            display: block; 
+            font-size: 22px; 
+            font-weight: bold; 
+            color: var(--primary); 
+        }
+
+        .stat-card p {
+            font-size: 12px;
+            color: #64748b;
+        }
+
+        /* أزرار التحكم والعمليات */
+        .button-group { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); 
+            gap: 10px; 
+        }
+
+        button { 
+            background: var(--primary); 
+            color: white; 
+            border: none; 
+            padding: 12px; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            font-weight: bold; 
+            transition: 0.2s; 
+            font-size: 14px;
+        }
+
+        button:hover { 
+            background: var(--primary-hover); 
+        }
+
+        .btn-success { 
+            background: #10b981; 
+        }
+
+        .btn-success:hover { 
+            background: #059669; 
+        }
+
+        .btn-secondary {
+            background: #64748b;
+        }
+        .btn-secondary:hover {
+            background: #475569;
+        }
+
+        /* شريط الإعلانات والربح */
+        .sidebar { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 20px; 
+        }
+
+        .ad-space { 
+            background: #f1f5f9; 
+            border: 2px dashed #cbd5e1; 
+            border-radius: 12px; 
+            height: 300px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            color: #64748b; 
+            font-weight: bold; 
+            text-align: center; 
+            padding: 20px; 
+        }
+
+        .tips-box {
+            background: #eff6ff;
+            border-right: 4px solid var(--primary);
+            padding: 15px;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+        .tips-box h4 { color: #1e3a8a; margin-bottom: 5px; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>المُحترَف - أداة تعديل وتحسين النصوص الرقمية</h1>
+            <p>نظّف نصوصك، حوّلها لهاشتاقات، وهيّئها للذكاء الاصطناعي أو النشر الفوري بضغطة زر.</p>
+        </header>
+
+        <div class="main-layout">
+            <!-- مساحة العمل الأساسية -->
+            <div class="workspace">
+                <textarea id="textInput" placeholder="أدخل أو الصق نصك هنا للبدء في المعالجة الفورية..."></textarea>
+                
+                <!-- لوحة الإحصائيات الفورية -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <span id="wordCount">0</span>
+                        <p>عدد الكلمات</p>
+                    </div>
+                    <div class="stat-card">
+                        <span id="charCount">0</span>
+                        <p>عدد الحروف</p>
+                    </div>
+                    <div class="stat-card">
+                        <span id="readingTime">0 د</span>
+                        <p>وقت القراءة المتوقع</p>
+                    </div>
+                </div>
+
+                <!-- أزرار التحكم والتنفيذ -->
+                <div class="button-group">
+                    <button onclick="cleanText()">تنظيف النص</button>
+                    <button onclick="convertToHashtags()">تحويل لهاشتاقات</button>
+                    <button class="btn-success" onclick="copyToClipboard()">نسخ النص المعدل</button>
+                    <button class="btn-secondary" onclick="clearAll()">مسح الكل</button>
+                </div>
+            </div>
+
+            <!-- شريط جانبي مخصص للربح من إعلانات أدسنس -->
+            <div class="sidebar">
+                <div class="ad-space">
+                    <!-- استبدل هذا الجزء مستقبلاً بشفرة إعلانات Google AdSense المباشرة -->
+                    مساحة إعلانية مخصصة للربح <br> (AdSense / Ezoic)
+                </div>
+                
+                <div class="tips-box">
+                    <h4>💡 نصيحة سريعة:</h4>
+                    <p>ميزة "تنظيف النص" تقوم بإزالة أي مسافات زائدة وتكرار غير مبرر لتجعل النص جاهزاً تماماً للذكاء الاصطناعي (ChatGPT) لتوفير الحروف.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- برمجة التفاعل الذكي وفلاتر النصوص بـ JavaScript -->
+    <script>
+        const textInput = document.getElementById('textInput');
+        const wordCount = document.getElementById('wordCount');
+        const charCount = document.getElementById('charCount');
+        const readingTime = document.getElementById('readingTime');
+
+        // استماع فوري لأي تغيير في النص وتحديث الإحصائيات تلقائياً
+        textInput.addEventListener('input', updateStats);
+
+        function updateStats() {
+            const text = textInput.value.trim();
+            
+            // حساب الكلمات بشكل دقيق
+            const words = text === "" ? [] : text.split(/\s+/);
+            wordCount.innerText = words.length;
+            
+            // حساب الحروف
+            charCount.innerText = text.length;
+
+            // حساب وقت القراءة التقريبي (المعدل الطبيعي هو 200 كلمة بالدقيقة)
+            const time = Math.ceil(words.length / 200);
+            readingTime.innerText = text === "" ? "0 د" : time + " د";
+        }
+
+        // وظيفة تنظيف النص من المسافات والفراغات العشوائية
+        function cleanText() {
+            let text = textInput.value;
+            if(!text) return;
+            text = text.replace(/\s+/g, ' ').trim();
+            textInput.value = text;
+            updateStats();
+        }
+
+        // وظيفة تحويل النص إلى هاشتاقات جاهزة للسوشيال ميديا
+        function convertToHashtags() {
+            let text = textInput.value.trim();
+            if(!text) return;
+            let words = text.split(/\s+/);
+            // إضافة وسام الهاشتاق إذا لم يكن موجوداً
+            let hashtags = words.map(word => word.startsWith('#') ? word : '#' + word).join(' ');
+            textInput.value = hashtags;
+            updateStats();
+        }
+
+        // وظيفة النسخ الذكي للحافظة بنقرة واحدة
+        function copyToClipboard() {
+            if(!textInput.value) {
+                alert('الرجاء كتابة نص أولاً لتتمكن من نسخه!');
+                return;
+            }
+            textInput.select();
+            textInput.setSelectionRange(0, 99999); /* للهواتف المحمولة */
+            document.execCommand('copy');
+            alert('تم نسخ النص بنجاح إلى الحافظة! 🎉');
+        }
+
+        // وظيفة مسح النص وإعادة التصفير
+        function clearAll() {
+            textInput.value = "";
+            updateStats();
+        }
+    </script>
+</body>
+</html>
